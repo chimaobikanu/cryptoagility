@@ -12,6 +12,22 @@ All notable changes to CryptoAgility are recorded here. Format follows
 - Firmware cryptographic discovery.
 - SARIF output for CI integration.
 
+## [0.1.1] — 2026-10-04
+
+First version published to PyPI. Supersedes 0.1.0, which was tagged in the repository but never uploaded.
+
+### Changed
+- Licence metadata now uses the PEP 639 SPDX expression, so the index receives `License-Expression: AGPL-3.0-or-later`
+  with both licence files attached. The previous `{ text = ... }` form is deprecated and will eventually fail the build.
+- Package metadata URLs corrected. `Source` and `Issues` previously carried a `<your-account>` placeholder, which
+  would have shipped onto the project page.
+
+### Added
+- Release workflow: pushing a `v*` tag publishes to PyPI through trusted publishing (OIDC), with no stored token.
+  It runs the suite, builds the sdist and wheel, runs `twine check`, and refuses to upload if the tag disagrees with
+  the version in `pyproject.toml`.
+- Test suite expanded to 53 tests, covering the CLI exit-code gate and the `--exit-zero` escape hatch.
+
 ## [0.1.0] — 2026-10-04
 
 First release. Open core published under AGPL-3.0-or-later; migration orchestration retained as commercial.

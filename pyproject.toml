@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "cryptoagility"
-version = "0.1.0"
+version = "0.1.1"
 description = "Cryptographic asset discovery and CBOM generation — find every cryptographic asset, classify its quantum exposure, and produce an audit-ready migration register"
 readme = "README.md"
 license = "AGPL-3.0-or-later"
