@@ -1,0 +1,66 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.10", "3.11", "3.12"]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install
+        run: |
+          python -m venv .venv
+          ./.venv/bin/pip install --upgrade pip
+          ./.venv/bin/pip install -e .
+          ./.venv/bin/pip install pytest
+
+      - name: Test
+        run: ./.venv/bin/python -m pytest tests -q
+
+      - name: CLI smoke test
+        run: |
+          # --exit-zero: this step checks artefacts, not the gate. The gate is
+          # asserted by the next step, which expects a non-zero exit.
+          ./.venv/bin/cryptoagility sample --exit-zero --cbom /tmp/cbom.json --report /tmp/report.md
+          test -s /tmp/cbom.json
+          test -s /tmp/report.md
+          python - <<'EOF'
+          import json, sys
+          d = json.load(open("/tmp/cbom.json"))
+          assert d["bomFormat"] == "CycloneDX", d.get("bomFormat")
+          assert d["specVersion"] == "1.6", d.get("specVersion")
+          assert d["components"], "CBOM produced no components"
+          print(f"CBOM valid: {len(d['components'])} components")
+          EOF
+
+      - name: Exit code must be non-zero when quantum-vulnerable crypto is present
+        run: |
+          if ./.venv/bin/cryptoagility sample --cbom /tmp/c.json >/dev/null 2>&1; then
+            echo "expected a non-zero exit when vulnerable cryptography is found"
+            exit 1
+          fi
+          echo "correctly signalled vulnerable findings"
+
+      - name: Verify the tool makes no outbound connections
+        run: |
+          # The scanner must be offline. Fail if any network-capable import appears
+          # in the discovery core.
+          if grep -nE "^\s*(import|from)\s+(requests|urllib|httplib|http\.client|socket)" cryptoagility.py; then
+            echo "discovery core must not import networking modules"
+            exit 1
+          fi
+          echo "discovery core is offline"

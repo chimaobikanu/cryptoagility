@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CryptoAgility — Cryptographic Asset Discovery &amp; Post-Quantum Readiness</title>
+<meta name="description" content="Find every cryptographic asset across code, configuration, certificates and live connections. Classify quantum exposure. Produce an audit-ready migration register. Runs inside your own network.">
+<style>
+  :root{
+    --bg:#07100d; --bg2:#0b1714; --card:#0f1f1a; --line:#1d3a31;
+    --ink:#e8f2ee; --muted:#93aca3; --accent:#37e0a8; --accent2:#0f8f6a;
+    --warn:#ffb454; --bad:#ff6b6b;
+    --max:1080px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--accent); text-decoration:none}
+  a:hover{text-decoration:underline}
+  .wrap{max-width:var(--max); margin:0 auto; padding:0 20px}
+  header{
+    position:sticky; top:0; z-index:10; backdrop-filter:blur(8px);
+    background:rgba(7,16,13,.86); border-bottom:1px solid var(--line);
+  }
+  .nav{display:flex; align-items:center; justify-content:space-between; height:64px}
+  .brand{display:flex; align-items:center; gap:10px; font-weight:700; letter-spacing:-.2px}
+  .dot{width:11px;height:11px;border-radius:50%;background:var(--accent);box-shadow:0 0 14px var(--accent)}
+  .nav a.link{color:var(--muted); font-size:15px; margin-left:22px}
+  .nav a.link:hover{color:var(--ink)}
+  @media(max-width:768px){ .nav a.link{display:none} }
+
+  section{padding:72px 0; border-bottom:1px solid var(--line)}
+  section.alt{background:linear-gradient(180deg,var(--bg) 0%,var(--bg2) 100%)}
+  h1{font-size:clamp(30px,5.4vw,52px); line-height:1.1; margin:0 0 20px; letter-spacing:-1px}
+  h2{font-size:clamp(23px,3.4vw,32px); line-height:1.2; margin:0 0 16px; letter-spacing:-.5px}
+  h3{font-size:18px; margin:0 0 8px}
+  p.lead{font-size:clamp(16px,2.1vw,19px); color:var(--muted); max-width:70ch}
+  .eyebrow{
+    display:inline-block; font-size:12px; letter-spacing:1.6px; text-transform:uppercase;
+    color:var(--accent); border:1px solid var(--line); border-radius:999px;
+    padding:5px 12px; margin-bottom:20px; background:rgba(55,224,168,.06)
+  }
+  .btn{
+    display:inline-block; padding:13px 24px; border-radius:9px; font-weight:650; font-size:15px;
+    background:var(--accent); color:#04120d; border:1px solid var(--accent); margin:6px 8px 6px 0;
+  }
+  .btn:hover{text-decoration:none; filter:brightness(1.08)}
+  .btn.ghost{background:transparent; color:var(--ink); border-color:var(--line)}
+  .btn.ghost:hover{border-color:var(--accent)}
+
+  .grid{display:grid; gap:18px}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  .g2{grid-template-columns:repeat(2,1fr)}
+  @media(max-width:768px){ .g3,.g2{grid-template-columns:1fr} }
+
+  .card{background:var(--card); border:1px solid var(--line); border-radius:13px; padding:24px}
+  .card p{color:var(--muted); margin:8px 0 0; font-size:15px}
+  .num{
+    display:inline-flex; align-items:center; justify-content:center;
+    width:28px;height:28px;border-radius:7px;background:rgba(55,224,168,.12);
+    color:var(--accent); font-weight:700; font-size:14px; margin-bottom:12px
+  }
+  pre{
+    background:#050c0a; border:1px solid var(--line); border-radius:11px;
+    padding:18px; overflow-x:auto; font-size:13px; line-height:1.55;
+    font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace
+  }
+  .k{color:var(--muted)} .g{color:var(--accent)} .w{color:var(--warn)} .r{color:var(--bad)}
+  .badge{
+    display:inline-block; font-size:11px; letter-spacing:.7px; text-transform:uppercase;
+    padding:3px 9px; border-radius:999px; border:1px solid var(--line); color:var(--muted)
+  }
+  .price{font-size:32px; font-weight:750; letter-spacing:-1px; margin:6px 0 2px}
+  .price span{font-size:14px; font-weight:500; color:var(--muted); letter-spacing:0}
+  ul.ticks{list-style:none; padding:0; margin:16px 0 0}
+  ul.ticks li{padding:6px 0 6px 26px; position:relative; color:var(--muted); font-size:15px}
+  ul.ticks li:before{content:"✓"; position:absolute; left:0; color:var(--accent); font-weight:700}
+  .feature{grid-column:span 3}
+  @media(max-width:768px){ .feature{grid-column:span 1} }
+  footer{padding:44px 0; color:var(--muted); font-size:14px}
+  .faq details{border-bottom:1px solid var(--line); padding:16px 0}
+  .faq summary{cursor:pointer; font-weight:600; color:var(--ink)}
+  .faq p{color:var(--muted); margin:10px 0 0}
+  .note{font-size:13px; color:var(--muted); margin-top:14px}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <div class="brand"><span class="dot"></span> CryptoAgility</div>
+    <nav>
+      <a class="link" href="#problem">Why now</a>
+      <a class="link" href="#how">How it works</a>
+      <a class="link" href="#trust">Your network</a>
+      <a class="link" href="#pricing">Pricing</a>
+      <a class="btn" href="#contact" style="margin-left:18px;padding:9px 18px">Book a scan</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section>
+  <div class="wrap">
+    <span class="eyebrow">Post-quantum readiness</span>
+    <h1>You cannot migrate cryptography you cannot find.</h1>
+    <p class="lead">
+      CryptoAgility discovers every cryptographic asset across your source, configuration, certificates and live
+      connections — then classifies each one by its exposure to quantum attack and hands you an audit-ready
+      migration register.
+    </p>
+    <p class="lead" style="margin-top:14px">
+      It runs inside your network. Your code never leaves it.
+    </p>
+    <div style="margin-top:28px">
+      <a class="btn" href="#pricing">See pricing</a>
+      <a class="btn ghost" href="#how">How it works</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROBLEM ============ -->
+<section class="alt" id="problem">
+  <div class="wrap">
+    <h2>The deadline is already closer than the migration</h2>
+    <p class="lead">
+      NCSC guidance expects cryptographic discovery complete by <strong>2028</strong>, priority upgrades by 2031 and
+      full migration by <strong>2035</strong>. Discovery is the step that cannot be skipped, and it is the step
+      almost nobody has done — because cryptography is the one dependency enterprises have never inventoried.
+    </p>
+    <div class="grid g3" style="margin-top:30px">
+      <div class="card">
+        <h3>It is scattered</h3>
+        <p>Keys and algorithms live in application code, infrastructure configuration, third-party libraries, hardware modules and firmware that outlives its support window.</p>
+      </div>
+      <div class="card">
+        <h3>It is invisible</h3>
+        <p>No system holds the register. Ask any engineering team which algorithms they depend on and the honest answer is that they would have to go and look.</p>
+      </div>
+      <div class="card">
+        <h3>It is already exposed</h3>
+        <p>Anything with a long confidentiality lifetime is exposed to harvest-now-decrypt-later today — the traffic is being collected before the quantum computer exists.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ HOW ============ -->
+<section id="how">
+  <div class="wrap">
+    <h2>Three steps from unknown to sequenced</h2>
+    <div class="grid g3" style="margin-top:30px">
+      <div class="card">
+        <span class="num">1</span>
+        <h3>Discover</h3>
+        <p>Static analysis across Python, JavaScript, Java, Go and server configuration, X.509 certificate inspection, and runtime observation of what your systems actually negotiate on live connections — including cryptography inside vendor binaries whose source you will never see.</p>
+      </div>
+      <div class="card">
+        <span class="num">2</span>
+        <h3>Classify</h3>
+        <p>Every finding is graded by quantum exposure — broken outright by Shor's algorithm, weakened by Grover's, or holding adequate margin — and separately by whether it is unsafe today. RSA, ECC and DH are quantum-vulnerable whatever their key size. MD5, SHA-1 and 3DES are already broken.</p>
+      </div>
+      <div class="card">
+        <span class="num">3</span>
+        <h3>Sequence</h3>
+        <p>You get a CycloneDX CBOM an auditor can read, a prioritised migration queue ordered by exposure and effort, and the named replacement for each asset — ML-KEM for key establishment, ML-DSA for signatures.</p>
+      </div>
+    </div>
+
+    <h3 style="margin-top:44px">What the output looks like</h3>
+    <pre><span class="k">$</span> cryptoagility ./src --runtime live.jsonl --cbom cbom.json --report report.md
+  runtime observations merged: 8 findings from live.jsonl
+  cryptoagility 0.1.0: scanned ./src -&gt; 37 cryptographic usages
+
+<span class="g">## Summary</span>
+- Cryptographic usages found: <span class="g">37</span>
+- Quantum-vulnerable (Shor-broken, requires migration): <span class="r">12</span>
+- Classically broken (unsafe today): <span class="r">19</span>
+
+<span class="g">## Observed in use (runtime — negotiated on live connections)</span>
+| Negotiated cipher             | Protocol | Algorithms                  | Action       |
+|-------------------------------|----------|-----------------------------|--------------|
+| AES128-SHA                    | TLS1.2   | AES-128, SHA-1              | <span class="r">MIGRATE</span>      |
+| ECDHE-RSA-AES256-GCM-SHA384   | TLS1.2   | AES-256, ECDH, RSA, SHA-384 | <span class="r">MIGRATE</span>      |
+| TLS_AES_256_GCM_SHA384        | TLS1.3   | AES-256, SHA-384            | <span class="w">review</span>       |</pre>
+    <p class="note">
+      A finding that appears in both the static scan and the runtime observation is confirmed in use. A finding that
+      appears only at runtime is cryptography shipped inside a dependency or binary — the blind spot that scanners
+      reading only source will never show you.
+    </p>
+  </div>
+</section>
+
+<!-- ============ TRUST ============ -->
+<section class="alt" id="trust">
+  <div class="wrap">
+    <h2>Runs inside your network. Your code never leaves it.</h2>
+    <p class="lead">
+      We do not ask you to upload your source code to us, and we never see it. CryptoAgility is deployed on your own
+      infrastructure, performs no outbound calls and carries no telemetry. You run the scan; you keep the register.
+    </p>
+    <div class="grid g2" style="margin-top:28px">
+      <div class="card">
+        <h3>What we mean by self-hosted</h3>
+        <p>Deploy on a workstation or in your own environment. Runs offline. No account, no licence server callback, no data leaving the perimeter — which is usually the first objection a regulated buyer raises, answered before it is asked.</p>
+      </div>
+      <div class="card">
+        <h3>What we do provide</h3>
+        <p>The tool, the roadmap methodology and the evidence format. On the assessment tier an engineer works the findings with your team; the data stays yours throughout.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WHO ============ -->
+<section id="who">
+  <div class="wrap">
+    <h2>Who this is for</h2>
+    <div class="grid g2" style="margin-top:26px">
+      <div class="card">
+        <h3>Software vendors answering questionnaires</h3>
+        <p>Your enterprise customers have started asking about post-quantum readiness in supplier assessments. You need an answer with evidence behind it, this quarter.</p>
+      </div>
+      <div class="card">
+        <h3>Financial and insurance firms</h3>
+        <p>DORA and NIS2 put cryptographic controls inside ICT risk management, and the register has to exist before the controls can be tested.</p>
+      </div>
+      <div class="card">
+        <h3>Manufacturers selling into the EU</h3>
+        <p>The Cyber Resilience Act applies in full from December 2027, with software bills of materials and attestation duties for products with digital elements.</p>
+      </div>
+      <div class="card">
+        <h3>Consultancies and MSSPs</h3>
+        <p>You have the clients and the trust. White-label our engine as the assessment capability inside your own service.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PRICING ============ -->
+<section class="alt" id="pricing">
+  <div class="wrap">
+    <h2>Pricing</h2>
+    <p class="lead">Fixed scope, fixed price. The assessment is a service, so what you get does not depend on a sales meeting.</p>
+    <div class="grid g3" style="margin-top:30px">
+
+      <div class="card">
+        <span class="badge">Start here</span>
+        <h3 style="margin-top:14px">Discovery Scan</h3>
+        <div class="price">$2,500 <span>one-off</span></div>
+        <ul class="ticks">
+          <li>Source, configuration and certificate scan</li>
+          <li>Manual review of findings by an engineer</li>
+          <li>CycloneDX CBOM</li>
+          <li>Migration report and priority queue</li>
+          <li>Delivered in 5 working days</li>
+        </ul>
+      </div>
+
+      <div class="card" style="border-color:var(--accent2); background:linear-gradient(180deg,rgba(55,224,168,.07),transparent)">
+        <span class="badge" style="color:var(--accent); border-color:var(--accent2)">Most complete</span>
+        <h3 style="margin-top:14px">Readiness Assessment</h3>
+        <div class="price">$8,500 <span>one-off</span></div>
+        <ul class="ticks">
+          <li>Everything in the Discovery Scan</li>
+          <li>Runtime observation of live connections</li>
+          <li>Dependency and vendor-binary coverage</li>
+          <li>Sequenced migration roadmap with effort</li>
+          <li>Half-day findings workshop with your team</li>
+          <li>Executive summary for your auditor</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <span class="badge">Stay compliant</span>
+        <h3 style="margin-top:14px">Continuous</h3>
+        <div class="price">$1,500 <span>per month</span></div>
+        <ul class="ticks">
+          <li>CI integration and scheduled re-scan</li>
+          <li>Drift alerting when new cryptography appears</li>
+          <li>Evidence pack refreshed quarterly</li>
+          <li>Migration progress tracking against the plan</li>
+          <li>Available after any paid assessment</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card feature" style="margin-top:18px">
+      <h3>Consultancies and MSSPs — white-label</h3>
+      <p>
+        Run our engine inside your own assessment service, under your brand, with your methodology. Per-engagement or
+        annual licence from $6,000. Ask about a pilot engagement.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section id="faq">
+  <div class="wrap faq">
+    <h2>Questions</h2>
+    <details><summary>Do you see our source code?</summary>
+      <p>No. The tool runs inside your own environment and makes no outbound calls. Nothing leaves your perimeter. On the assessment tier an engineer reviews findings with your team, but the code itself is never transferred to us.</p></details>
+    <details><summary>How is this different from a free CBOM generator?</summary>
+      <p>Free tools produce an inventory. The inventory is not the hard part — deciding what to migrate first, proving to your auditor that the work is sequenced, and catching cryptography that only exists inside compiled dependencies all are. You are buying the register and the roadmap, and the scanner that produces them accurately.</p></details>
+    <details><summary>We do not use post-quantum algorithms anywhere. Is there anything to find?</summary>
+      <p>Almost certainly yes, and that is the point. Every RSA, ECDSA, ECDH and Ed25519 usage in your estate is quantum-vulnerable regardless of key size, and long-lived confidential data is already exposed to harvest-now-decrypt-later. Most estates also hold MD5, SHA-1 or 3DES somewhere, which are unsafe today regardless of quantum.</p></details>
+    <details><summary>What do we actually receive?</summary>
+      <p>A CycloneDX 1.6 CBOM in a standard format your tooling can consume, a migration report with a prioritised queue, and on the assessment tier a roadmap with sequencing and effort plus an executive summary written for a non-technical reader.</p></details>
+    <details><summary>Can it run in CI?</summary>
+      <p>Yes. The CLI takes a path, writes the CBOM and report, and returns a non-zero exit code when quantum-vulnerable cryptography is found — so it can gate a pipeline exactly as a linter would.</p></details>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="alt" id="contact">
+  <div class="wrap">
+    <h2>Start with a scan</h2>
+    <p class="lead">
+      Tell us roughly what you are running and we will confirm scope and price. If you would rather see the output
+      before you buy anything, ask for a sample report from an anonymised estate.
+    </p>
+    <div style="margin-top:26px">
+      <a class="btn" href="mailto:c.kanu@mainnoltd.com?subject=CryptoAgility%20scan%20enquiry">c.kanu@mainnoltd.com</a>
+    </div>
+    <p class="note">
+      <!-- Add real client references here once you have them. Until then this offer is
+           stronger than a fake testimonial: let them judge the output instead.
+           Do NOT publish invented testimonials or client logos. -->
+      We are new, and we would rather show you the work than describe it. Ask for a free scan
+      of one repository, and judge the report yourself before you buy anything.
+    </p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="brand" style="margin-bottom:10px"><span class="dot"></span> CryptoAgility</div>
+    <p style="margin:0">A product of Maobyte Innovations Ltd. Cryptographic asset discovery and post-quantum readiness.</p>
+    <p style="margin:8px 0 0">© 2026 Maobyte Innovations Ltd. All rights reserved.</p>
+  </div>
+</footer>
+
+</body>
+</html>

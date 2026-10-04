@@ -1,0 +1,560 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.6",
+  "serialNumber": "urn:uuid:33182606-0000-0000-0000-000000000000",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2026-10-04T12:04:01.776570+00:00",
+    "tools": [
+      {
+        "vendor": "CryptoAgility",
+        "name": "cryptoagility",
+        "version": "0.1.0-mvp"
+      }
+    ],
+    "component": {
+      "type": "application",
+      "name": "sample"
+    },
+    "properties": [
+      {
+        "name": "cryptoagility:scannedPath",
+        "value": "sample"
+      }
+    ]
+  },
+  "components": [
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto:ecdh",
+      "name": "ECDH",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "key-agree",
+          "parameterSetIdentifier": "unspecified",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "unknown",
+          "certificationLevel": [],
+          "mode": "",
+          "padding": "",
+          "cryptoFunctions": [],
+          "classicalSecurityLevel": 128,
+          "nistQuantumSecurityLevel": 0
+        }
+      },
+      "properties": [
+        {
+          "name": "cryptoagility:quantumRisk",
+          "value": "shor-broken"
+        },
+        {
+          "name": "cryptoagility:classicalRisk",
+          "value": "ok"
+        },
+        {
+          "name": "cryptoagility:observedInUse",
+          "value": "true"
+        },
+        {
+          "name": "cryptoagility:migrationAdvice",
+          "value": "Migrate to ML-KEM (FIPS 203) or hybrid X25519MLKEM768"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto:ecdsa",
+      "name": "ECDSA",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "signature",
+          "parameterSetIdentifier": "unspecified",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "unknown",
+          "certificationLevel": [],
+          "mode": "",
+          "padding": "",
+          "cryptoFunctions": [],
+          "classicalSecurityLevel": 128,
+          "nistQuantumSecurityLevel": 0
+        }
+      },
+      "properties": [
+        {
+          "name": "cryptoagility:quantumRisk",
+          "value": "shor-broken"
+        },
+        {
+          "name": "cryptoagility:classicalRisk",
+          "value": "ok"
+        },
+        {
+          "name": "cryptoagility:observedInUse",
+          "value": "false"
+        },
+        {
+          "name": "cryptoagility:migrationAdvice",
+          "value": "Migrate to ML-DSA (FIPS 204)"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto:ecdsa-prime256v1",
+      "name": "ECDSA-prime256v1",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "signature",
+          "parameterSetIdentifier": "prime256v1",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "unknown",
+          "certificationLevel": [],
+          "mode": "",
+          "padding": "",
+          "cryptoFunctions": [],
+          "classicalSecurityLevel": 128,
+          "nistQuantumSecurityLevel": 0
+        }
+      },
+      "properties": [
+        {
+          "name": "cryptoagility:quantumRisk",
+          "value": "shor-broken"
+        },
+        {
+          "name": "cryptoagility:classicalRisk",
+          "value": "ok"
+        },
+        {
+          "name": "cryptoagility:observedInUse",
+          "value": "false"
+        },
+        {
+          "name": "cryptoagility:migrationAdvice",
+          "value": "Migrate to ML-DSA (FIPS 204)"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto:ed25519",
+      "name": "Ed25519",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "signature",
+          "parameterSetIdentifier": "unspecified",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "unknown",
+          "certificationLevel": [],
+          "mode": "",
+          "padding": "",
+          "cryptoFunctions": [],
+          "classicalSecurityLevel": 128,
+          "nistQuantumSecurityLevel": 0
+        }
+      },
+      "properties": [
+        {
+          "name": "cryptoagility:quantumRisk",
+          "value": "shor-broken"
+        },
+        {
+          "name": "cryptoagility:classicalRisk",
+          "value": "ok"
+        },
+        {
+          "name": "cryptoagility:observedInUse",
+          "value": "false"
+        },
+        {
+          "name": "cryptoagility:migrationAdvice",
+          "value": "Migrate to ML-DSA (FIPS 204)"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto:rsa",
+      "name": "RSA",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "pke",
+          "parameterSetIdentifier": "unspecified",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "unknown",
+          "certificationLevel": [],
+          "mode": "",
+          "padding": "",
+          "cryptoFunctions": [],
+          "classicalSecurityLevel": 0,
+          "nistQuantumSecurityLevel": 0
+        }
+      },
+      "properties": [
+        {
+          "name": "cryptoagility:quantumRisk",
+          "value": "shor-broken"
+        },
+        {
+          "name": "cryptoagility:classicalRisk",
+          "value": "broken"
+        },
+        {
+          "name": "cryptoagility:observedInUse",
+          "value": "true"
+        },
+        {
+          "name": "cryptoagility:migrationAdvice",
+          "value": "Migrate to ML-KEM (FIPS 203) for key establishment; ML-DSA (FIPS 204) for signatures"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto:rsa-2048",
+      "name": "RSA-2048",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "pke",
+          "parameterSetIdentifier": "2048",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "unknown",
+          "certificationLevel": [],
+          "mode": "",
+          "padding": "",
+          "cryptoFunctions": [],
+          "classicalSecurityLevel": 0,
+          "nistQuantumSecurityLevel": 0
+        }
+      },
+      "properties": [
+        {
+          "name": "cryptoagility:quantumRisk",
+          "value": "shor-broken"
+        },
+        {
+          "name": "cryptoagility:classicalRisk",
+          "value": "broken"
+        },
+        {
+          "name": "cryptoagility:observedInUse",
+          "value": "true"
+        },
+        {
+          "name": "cryptoagility:migrationAdvice",
+          "value": "Migrate to ML-KEM (FIPS 203) for key establishment; ML-DSA (FIPS 204) for signatures"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto:3des",
+      "name": "3DES",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "block-cipher",
+          "parameterSetIdentifier": "unspecified",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "unknown",
+          "certificationLevel": [],
+          "mode": "",
+          "padding": "",
+          "cryptoFunctions": [],
+          "classicalSecurityLevel": 0,
+          "nistQuantumSecurityLevel": 1
+        }
+      },
+      "properties": [
+        {
+          "name": "cryptoagility:quantumRisk",
+          "value": "grover-weakened"
+        },
+        {
+          "name": "cryptoagility:classicalRisk",
+          "value": "broken"
+        },
+        {
+          "name": "cryptoagility:observedInUse",
+          "value": "false"
+        },
+        {
+          "name": "cryptoagility:migrationAdvice",
+          "value": "Retire. Migrate to AES-256-GCM"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto:aes",
+      "name": "AES",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "block-cipher",
+          "parameterSetIdentifier": "unspecified",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "unknown",
+          "certificationLevel": [],
+          "mode": "",
+          "padding": "",
+          "cryptoFunctions": [],
+          "classicalSecurityLevel": 128,
+          "nistQuantumSecurityLevel": 1
+        }
+      },
+      "properties": [
+        {
+          "name": "cryptoagility:quantumRisk",
+          "value": "grover-weakened"
+        },
+        {
+          "name": "cryptoagility:classicalRisk",
+          "value": "ok"
+        },
+        {
+          "name": "cryptoagility:observedInUse",
+          "value": "false"
+        },
+        {
+          "name": "cryptoagility:migrationAdvice",
+          "value": "Confirm key size is 256-bit for long-lived data"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto:aes-128",
+      "name": "AES-128",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "block-cipher",
+          "parameterSetIdentifier": "unspecified",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "unknown",
+          "certificationLevel": [],
+          "mode": "",
+          "padding": "",
+          "cryptoFunctions": [],
+          "classicalSecurityLevel": 128,
+          "nistQuantumSecurityLevel": 1
+        }
+      },
+      "properties": [
+        {
+          "name": "cryptoagility:quantumRisk",
+          "value": "grover-weakened"
+        },
+        {
+          "name": "cryptoagility:classicalRisk",
+          "value": "ok"
+        },
+        {
+          "name": "cryptoagility:observedInUse",
+          "value": "true"
+        },
+        {
+          "name": "cryptoagility:migrationAdvice",
+          "value": "Consider AES-256 for long-lived data"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto:md5",
+      "name": "MD5",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "hash",
+          "parameterSetIdentifier": "unspecified",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "unknown",
+          "certificationLevel": [],
+          "mode": "",
+          "padding": "",
+          "cryptoFunctions": [],
+          "classicalSecurityLevel": 0,
+          "nistQuantumSecurityLevel": 1
+        }
+      },
+      "properties": [
+        {
+          "name": "cryptoagility:quantumRisk",
+          "value": "grover-weakened"
+        },
+        {
+          "name": "cryptoagility:classicalRisk",
+          "value": "broken"
+        },
+        {
+          "name": "cryptoagility:observedInUse",
+          "value": "false"
+        },
+        {
+          "name": "cryptoagility:migrationAdvice",
+          "value": "Retire. Migrate to SHA-256"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto:sha-1",
+      "name": "SHA-1",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "hash",
+          "parameterSetIdentifier": "unspecified",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "unknown",
+          "certificationLevel": [],
+          "mode": "",
+          "padding": "",
+          "cryptoFunctions": [],
+          "classicalSecurityLevel": 0,
+          "nistQuantumSecurityLevel": 1
+        }
+      },
+      "properties": [
+        {
+          "name": "cryptoagility:quantumRisk",
+          "value": "grover-weakened"
+        },
+        {
+          "name": "cryptoagility:classicalRisk",
+          "value": "broken"
+        },
+        {
+          "name": "cryptoagility:observedInUse",
+          "value": "true"
+        },
+        {
+          "name": "cryptoagility:migrationAdvice",
+          "value": "Retire. Migrate to SHA-256 or SHA-384"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto:aes-256",
+      "name": "AES-256",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "block-cipher",
+          "parameterSetIdentifier": "unspecified",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "unknown",
+          "certificationLevel": [],
+          "mode": "",
+          "padding": "",
+          "cryptoFunctions": [],
+          "classicalSecurityLevel": 128,
+          "nistQuantumSecurityLevel": 5
+        }
+      },
+      "properties": [
+        {
+          "name": "cryptoagility:quantumRisk",
+          "value": "resistant"
+        },
+        {
+          "name": "cryptoagility:classicalRisk",
+          "value": "ok"
+        },
+        {
+          "name": "cryptoagility:observedInUse",
+          "value": "true"
+        },
+        {
+          "name": "cryptoagility:migrationAdvice",
+          "value": "Retain. 256-bit key retains adequate margin under Grover"
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto:sha-256",
+      "name": "SHA-256",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "hash",
+          "parameterSetIdentifier": "unspecified",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "unknown",
+          "certificationLevel": [],
+          "mode": "",
+          "padding": "",
+          "cryptoFunctions": [],
+          "classicalSecurityLevel": 128,
+          "nistQuantumSecurityLevel": 5
+        }
+      },
+      "properties": [
+        {
+          "name": "cryptoagility:quantumRisk",
+          "value": "resistant"
+        },
+        {
+          "name": "cryptoagility:classicalRisk",
+          "value": "ok"
+        },
+        {
+          "name": "cryptoagility:observedInUse",
+          "value": "false"
+        },
+        {
+          "name": "cryptoagility:migrationAdvice",
+          "value": "Retain."
+        }
+      ]
+    },
+    {
+      "type": "cryptographic-asset",
+      "bom-ref": "crypto:sha-384",
+      "name": "SHA-384",
+      "cryptoProperties": {
+        "assetType": "algorithm",
+        "algorithmProperties": {
+          "primitive": "hash",
+          "parameterSetIdentifier": "unspecified",
+          "executionEnvironment": "software-plain-ram",
+          "implementationPlatform": "unknown",
+          "certificationLevel": [],
+          "mode": "",
+          "padding": "",
+          "cryptoFunctions": [],
+          "classicalSecurityLevel": 128,
+          "nistQuantumSecurityLevel": 5
+        }
+      },
+      "properties": [
+        {
+          "name": "cryptoagility:quantumRisk",
+          "value": "resistant"
+        },
+        {
+          "name": "cryptoagility:classicalRisk",
+          "value": "ok"
+        },
+        {
+          "name": "cryptoagility:observedInUse",
+          "value": "true"
+        },
+        {
+          "name": "cryptoagility:migrationAdvice",
+          "value": "Retain."
+        }
+      ]
+    }
+  ]
+}

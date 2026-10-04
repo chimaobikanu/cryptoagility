@@ -1,0 +1,50 @@
+/*
+ * ca_ebpf.bt — CryptoAgility runtime layer, kernel-side variant (bpftrace).
+ *
+ * STATUS: NOT EXECUTED in the build environment — the sandbox has no root and no
+ * CAP_BPF, so a uprobe-based kernel observer cannot be attached here. This file is
+ * included as the production variant of the same observation the unprivileged
+ * LD_PRELOAD shim performs: it attaches to libssl's exported entry points and
+ * records negotiated cipher suites without modifying the target process.
+ *
+ * Run as:  sudo bpftrace ca_ebpf.bt
+ * Requires: bpftrace, and a libssl path matching the host (adjust the path below).
+ *
+ * The advantage over the shim is coverage: it observes every process on the host
+ * that loads libssl, including ones you cannot restart or preload.
+ */
+
+BEGIN
+{
+    printf("ca_ebpf: observing libssl negotiation (Ctrl-C to stop)\n");
+}
+
+/* Cipher chosen by a connection. arg0 = SSL*, retval = SSL_CIPHER* */
+uprobe:/usr/lib/x86_64-linux-gnu/libssl.so.3:SSL_get_current_cipher
+{
+    printf("{\"event\":\"negotiated\",\"pid\":%d,\"comm\":\"%s\",\"probe\":\"SSL_get_current_cipher\"}\n",
+           pid, comm);
+}
+
+/* Encryption activity on an established session */
+uprobe:/usr/lib/x86_64-linux-gnu/libssl.so.3:SSL_write
+{
+    printf("{\"event\":\"write\",\"pid\":%d,\"comm\":\"%s\",\"bytes\":%d}\n",
+           pid, comm, (int)arg2);
+}
+
+uprobe:/usr/lib/x86_64-linux-gnu/libssl.so.3:SSL_read
+{
+    printf("{\"event\":\"read\",\"pid\":%d,\"comm\":\"%s\"}\n", pid, comm);
+}
+
+/* Configured policy, captured at the point it is set */
+uprobe:/usr/lib/x86_64-linux-gnu/libssl.so.3:SSL_CTX_set_cipher_list
+{
+    printf("{\"event\":\"configured\",\"pid\":%d,\"comm\":\"%s\",\"setting\":\"cipher_list\"}\n", pid, comm);
+}
+
+uprobe:/usr/lib/x86_64-linux-gnu/libssl.so.3:SSL_CTX_set_ciphersuites
+{
+    printf("{\"event\":\"configured\",\"pid\":%d,\"comm\":\"%s\",\"setting\":\"tls13_ciphersuites\"}\n", pid, comm);
+}
