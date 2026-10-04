@@ -23,7 +23,19 @@ from dataclasses import dataclass, field, asdict
 from datetime import datetime, timezone
 from pathlib import Path
 
-VERSION = "0.1.0-mvp"
+# The version reported to users and written into the CBOM. The installed
+# distribution is authoritative; a source checkout falls back to the constant
+# below. tests/test_version.py asserts that constant against pyproject.toml so
+# the two cannot drift apart silently.
+_FALLBACK_VERSION = "0.1.2"
+try:
+    from importlib.metadata import PackageNotFoundError as _PNF, version as _dist_version
+    try:
+        VERSION = _dist_version("cryptoagility")
+    except _PNF:
+        VERSION = _FALLBACK_VERSION
+except Exception:                                    # pragma: no cover
+    VERSION = _FALLBACK_VERSION
 
 # --------------------------------------------------------------------------- #
 # Classification model

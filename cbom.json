@@ -1,15 +1,15 @@
 {
   "bomFormat": "CycloneDX",
   "specVersion": "1.6",
-  "serialNumber": "urn:uuid:33182606-0000-0000-0000-000000000000",
+  "serialNumber": "urn:uuid:79066574-0000-0000-0000-000000000000",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-10-04T12:04:01.776570+00:00",
+    "timestamp": "2026-10-04T13:50:46.664022+00:00",
     "tools": [
       {
         "vendor": "CryptoAgility",
         "name": "cryptoagility",
-        "version": "0.1.0-mvp"
+        "version": "0.1.2"
       }
     ],
     "component": {
@@ -24,44 +24,6 @@
     ]
   },
   "components": [
-    {
-      "type": "cryptographic-asset",
-      "bom-ref": "crypto:ecdh",
-      "name": "ECDH",
-      "cryptoProperties": {
-        "assetType": "algorithm",
-        "algorithmProperties": {
-          "primitive": "key-agree",
-          "parameterSetIdentifier": "unspecified",
-          "executionEnvironment": "software-plain-ram",
-          "implementationPlatform": "unknown",
-          "certificationLevel": [],
-          "mode": "",
-          "padding": "",
-          "cryptoFunctions": [],
-          "classicalSecurityLevel": 128,
-          "nistQuantumSecurityLevel": 0
-        }
-      },
-      "properties": [
-        {
-          "name": "cryptoagility:quantumRisk",
-          "value": "shor-broken"
-        },
-        {
-          "name": "cryptoagility:classicalRisk",
-          "value": "ok"
-        },
-        {
-          "name": "cryptoagility:observedInUse",
-          "value": "true"
-        },
-        {
-          "name": "cryptoagility:migrationAdvice",
-          "value": "Migrate to ML-KEM (FIPS 203) or hybrid X25519MLKEM768"
-        }
-      ]
-    },
     {
       "type": "cryptographic-asset",
       "bom-ref": "crypto:ecdsa",
@@ -206,7 +168,7 @@
         },
         {
           "name": "cryptoagility:observedInUse",
-          "value": "true"
+          "value": "false"
         },
         {
           "name": "cryptoagility:migrationAdvice",
@@ -244,7 +206,7 @@
         },
         {
           "name": "cryptoagility:observedInUse",
-          "value": "true"
+          "value": "false"
         },
         {
           "name": "cryptoagility:migrationAdvice",
@@ -330,44 +292,6 @@
     },
     {
       "type": "cryptographic-asset",
-      "bom-ref": "crypto:aes-128",
-      "name": "AES-128",
-      "cryptoProperties": {
-        "assetType": "algorithm",
-        "algorithmProperties": {
-          "primitive": "block-cipher",
-          "parameterSetIdentifier": "unspecified",
-          "executionEnvironment": "software-plain-ram",
-          "implementationPlatform": "unknown",
-          "certificationLevel": [],
-          "mode": "",
-          "padding": "",
-          "cryptoFunctions": [],
-          "classicalSecurityLevel": 128,
-          "nistQuantumSecurityLevel": 1
-        }
-      },
-      "properties": [
-        {
-          "name": "cryptoagility:quantumRisk",
-          "value": "grover-weakened"
-        },
-        {
-          "name": "cryptoagility:classicalRisk",
-          "value": "ok"
-        },
-        {
-          "name": "cryptoagility:observedInUse",
-          "value": "true"
-        },
-        {
-          "name": "cryptoagility:migrationAdvice",
-          "value": "Consider AES-256 for long-lived data"
-        }
-      ]
-    },
-    {
-      "type": "cryptographic-asset",
       "bom-ref": "crypto:md5",
       "name": "MD5",
       "cryptoProperties": {
@@ -434,49 +358,11 @@
         },
         {
           "name": "cryptoagility:observedInUse",
-          "value": "true"
+          "value": "false"
         },
         {
           "name": "cryptoagility:migrationAdvice",
           "value": "Retire. Migrate to SHA-256 or SHA-384"
-        }
-      ]
-    },
-    {
-      "type": "cryptographic-asset",
-      "bom-ref": "crypto:aes-256",
-      "name": "AES-256",
-      "cryptoProperties": {
-        "assetType": "algorithm",
-        "algorithmProperties": {
-          "primitive": "block-cipher",
-          "parameterSetIdentifier": "unspecified",
-          "executionEnvironment": "software-plain-ram",
-          "implementationPlatform": "unknown",
-          "certificationLevel": [],
-          "mode": "",
-          "padding": "",
-          "cryptoFunctions": [],
-          "classicalSecurityLevel": 128,
-          "nistQuantumSecurityLevel": 5
-        }
-      },
-      "properties": [
-        {
-          "name": "cryptoagility:quantumRisk",
-          "value": "resistant"
-        },
-        {
-          "name": "cryptoagility:classicalRisk",
-          "value": "ok"
-        },
-        {
-          "name": "cryptoagility:observedInUse",
-          "value": "true"
-        },
-        {
-          "name": "cryptoagility:migrationAdvice",
-          "value": "Retain. 256-bit key retains adequate margin under Grover"
         }
       ]
     },
@@ -511,44 +397,6 @@
         {
           "name": "cryptoagility:observedInUse",
           "value": "false"
-        },
-        {
-          "name": "cryptoagility:migrationAdvice",
-          "value": "Retain."
-        }
-      ]
-    },
-    {
-      "type": "cryptographic-asset",
-      "bom-ref": "crypto:sha-384",
-      "name": "SHA-384",
-      "cryptoProperties": {
-        "assetType": "algorithm",
-        "algorithmProperties": {
-          "primitive": "hash",
-          "parameterSetIdentifier": "unspecified",
-          "executionEnvironment": "software-plain-ram",
-          "implementationPlatform": "unknown",
-          "certificationLevel": [],
-          "mode": "",
-          "padding": "",
-          "cryptoFunctions": [],
-          "classicalSecurityLevel": 128,
-          "nistQuantumSecurityLevel": 5
-        }
-      },
-      "properties": [
-        {
-          "name": "cryptoagility:quantumRisk",
-          "value": "resistant"
-        },
-        {
-          "name": "cryptoagility:classicalRisk",
-          "value": "ok"
-        },
-        {
-          "name": "cryptoagility:observedInUse",
-          "value": "true"
         },
         {
           "name": "cryptoagility:migrationAdvice",

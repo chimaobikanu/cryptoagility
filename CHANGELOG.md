@@ -12,6 +12,15 @@ All notable changes to CryptoAgility are recorded here. Format follows
 - Firmware cryptographic discovery.
 - SARIF output for CI integration.
 
+## [0.1.2] — 2026-10-04
+
+### Fixed
+- The CLI banner, the CBOM `tools[].version` field and the report header all announced a hardcoded `0.1.0-mvp`
+  regardless of the package version. A tool that misreports its own version corrupts every bug report made against
+  it, so the version now comes from the installed distribution metadata, with a source-checkout fallback.
+- Added `tests/test_version.py`, which asserts that fallback against `pyproject.toml`, so the reported version cannot
+  drift from the released version again.
+
 ## [0.1.1] — 2026-10-04
 
 First version published to PyPI. Supersedes 0.1.0, which was tagged in the repository but never uploaded.
