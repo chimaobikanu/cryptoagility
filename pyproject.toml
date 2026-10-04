@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools>=68"]
+requires = ["setuptools>=77"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -7,14 +7,14 @@ name = "cryptoagility"
 version = "0.1.0"
 description = "Cryptographic asset discovery and CBOM generation — find every cryptographic asset, classify its quantum exposure, and produce an audit-ready migration register"
 readme = "README.md"
-license = { text = "AGPL-3.0-or-later" }
+license = "AGPL-3.0-or-later"
+license-files = ["LICENSE", "LICENSE-COMMERCIAL.md"]
 requires-python = ">=3.10"
 authors = [{ name = "Maobyte Innovations Ltd" }]
 keywords = ["cryptography", "post-quantum", "CBOM", "CycloneDX", "security", "PQC", "compliance"]
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Information Technology",
-    "License :: OSI Approved :: GNU Affero General Public License v3 or later (AGPLv3+)",
     "Topic :: Security :: Cryptography",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.10",

@@ -91,6 +91,18 @@ jobs:
     permissions:
       id-token: write
     steps:
+      - name: Honour the manual-run confirmation
+        if: github.event_name == 'workflow_dispatch'
+        env:
+          # Passed through the environment rather than interpolated into the
+          # script, so the input cannot be read as shell syntax.
+          CONFIRM: ${{ inputs.confirm }}
+        run: |
+          if [ "$CONFIRM" != "publish" ]; then
+            echo "manual runs require confirm=publish; got '$CONFIRM'"
+            exit 1
+          fi
+
       - uses: actions/download-artifact@v4
         with:
           name: dist
