@@ -108,4 +108,5 @@ The point of publishing is distribution, not tidiness. In the first fortnight:
   that is genuinely less common
 - note honestly in the announcement what CryptoAgility does not do yet (HSM and firmware discovery), because the
   people who care about this will find out anyway and it costs nothing to say first
-- put the repository link on the landing page (`site/index.html`) and on `mainnoltd.com`
+- the landing page is `https://mainnoltd.com/cryptoagility/` (part of the company site); the `site/index.html` in
+  this repository is only a redirect to it, so there is one canonical page rather than two that drift

@@ -9,10 +9,12 @@ register as a CycloneDX CBOM.
 It is built to run **inside your own network**. It makes no outbound calls and carries no telemetry. Your code never
 leaves your perimeter.
 
+Product page, pricing and the honest limitations: **https://mainnoltd.com/cryptoagility/**
+
 ```
 $ cryptoagility ./src --runtime live.jsonl --cbom cbom.json --report report.md
   runtime observations merged: 8 findings from live.jsonl
-  cryptoagility 0.1.0: scanned ./src -> 37 cryptographic usages
+  cryptoagility 0.1.2: scanned ./src -> 37 cryptographic usages
 
 ## Summary
 - Cryptographic usages found: 37
@@ -110,4 +112,5 @@ Early. Detection rules are deliberately shallow here; the depth of a detection c
 
 ---
 
-A product of [Maobyte Innovations Ltd](https://mainnoltd.com).
+A product of [Maobyte Innovations Ltd](https://mainnoltd.com), trading as Mainno.
+Product page: https://mainnoltd.com/cryptoagility/

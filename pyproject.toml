@@ -24,7 +24,7 @@ classifiers = [
 ]
 
 [project.urls]
-Homepage = "https://mainnoltd.com"
+Homepage = "https://mainnoltd.com/cryptoagility/"
 Source = "https://github.com/chimaobikanu/cryptoagility"
 Issues = "https://github.com/chimaobikanu/cryptoagility/issues"
 Changelog = "https://github.com/chimaobikanu/cryptoagility/blob/main/CHANGELOG.md"
