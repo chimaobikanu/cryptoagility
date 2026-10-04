@@ -1,0 +1,100 @@
+name: Release
+
+# Publishes to PyPI from a tag, using OIDC trusted publishing — no long-lived
+# token is stored in this repository or in GitHub secrets.
+#
+# One-time setup, on the PyPI side (this cannot be done from here):
+#   PyPI -> Your projects -> cryptoagility -> Publishing -> Add a new pending publisher
+#   Owner: chimaobikanu   Repository: cryptoagility   Workflow: release.yml   Environment: pypi
+# Until that exists, the publish job fails at the last step and nothing is uploaded.
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+    inputs:
+      confirm:
+        description: "Type publish to confirm a manual run"
+        required: true
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install
+        run: |
+          python -m venv .venv
+          ./.venv/bin/pip install --upgrade pip
+          ./.venv/bin/pip install -e ".[dev]"
+
+      - name: Test
+        run: ./.venv/bin/python -m pytest tests -q
+
+  build:
+    name: Build
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Build sdist and wheel
+        run: |
+          python -m pip install --upgrade build
+          python -m build
+
+      - name: Check the package metadata renders
+        run: |
+          python -m pip install --upgrade twine
+          python -m twine check dist/*
+
+      - name: Confirm the tag matches the version in pyproject.toml
+        if: startsWith(github.ref, 'refs/tags/')
+        run: |
+          VERSION=$(python -c "
+          import re, pathlib
+          text = pathlib.Path('pyproject.toml').read_text()
+          print(re.search(r'^version\s*=\s*\"([^\"]+)\"', text, re.M).group(1))
+          ")
+          TAG="${GITHUB_REF_NAME#v}"
+          if [ "$VERSION" != "$TAG" ]; then
+            echo "tag $GITHUB_REF_NAME does not match pyproject version $VERSION"
+            exit 1
+          fi
+          echo "tag and version agree: $VERSION"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
+
+  publish:
+    name: Publish to PyPI
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: pypi
+      url: https://pypi.org/p/cryptoagility
+    permissions:
+      id-token: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
+
+      - name: Publish
+        uses: pypa/gh-action-pypi-publish@release/v1
