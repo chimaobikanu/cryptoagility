@@ -104,7 +104,7 @@ That is the honest boundary of this release.
 GNU Affero General Public License v3.0 or later — see [LICENSE](LICENSE).
 
 Using CryptoAgility internally is unrestricted. To embed it in a product, or offer it to third parties as a service,
-a commercial licence is available: **c.kanu@mainnoltd.com**.
+a commercial licence is available through the contact form at **https://mainnoltd.com/contact**.
 
 ## Status
 
