@@ -120,7 +120,12 @@ git archive HEAD | tar -x -C "$WORK"
   cd "$WORK"
   git init -q -b main
   git add -A
-  git -c user.email="c.kanu@mainnoltd.com" -c user.name="Maobyte Innovations Ltd" \
+  # Commit identity must not be a deliverable personal address: this repository is public and the
+  # author line of every commit it makes is world-readable. GitHub's noreply form still attributes
+  # the commit to the account, and bounces nowhere. Override with GIT_AUTHOR_EMAIL if you want a
+  # different identity for a particular publication.
+  git -c user.email="${GIT_AUTHOR_EMAIL:-chimaobikanu@users.noreply.github.com}" \
+      -c user.name="${GIT_AUTHOR_NAME:-Maobyte Innovations Ltd}" \
       commit -q -m "CryptoAgility 0.1.0 — cryptographic discovery and CBOM generation
 
 Static discovery across Python, JavaScript, Java and Go, X.509 certificate
