@@ -74,4 +74,5 @@ where the commercial licence applies.
 
 ## Enquiries
 
-**c.kanu@mainnoltd.com**
+**https://mainnoltd.com/contact**
+(contact form — no address is published publicly)
