@@ -4,7 +4,7 @@
 
 Do **not** open a public issue for a security problem in this tool.
 
-Email **c.kanu@mainnoltd.com** with:
+Use the contact form at **https://mainnoltd.com/contact** with:
 
 - the version and platform,
 - what you did, what happened, and what you expected,
