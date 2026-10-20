@@ -12,6 +12,14 @@ All notable changes to CryptoAgility are recorded here. Format follows
 - Firmware cryptographic discovery.
 - SARIF output for CI integration.
 
+## [0.1.3] - 2026-10-20
+
+### Changed
+- Contact details in the README, `SECURITY.md` and the commercial licence were replaced
+  with the company contact form. The repository is public and the PyPI project page renders
+  its description from the README, so a personal address there was world-readable and
+  scrapable. This release is what removes it from the published page. The code is unchanged.
+
 ## [0.1.2] — 2026-10-04
 
 ### Fixed
