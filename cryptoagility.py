@@ -27,7 +27,7 @@ from pathlib import Path
 # distribution is authoritative; a source checkout falls back to the constant
 # below. tests/test_version.py asserts that constant against pyproject.toml so
 # the two cannot drift apart silently.
-_FALLBACK_VERSION = "0.1.2"
+_FALLBACK_VERSION = "0.1.3"
 try:
     from importlib.metadata import PackageNotFoundError as _PNF, version as _dist_version
     try:
